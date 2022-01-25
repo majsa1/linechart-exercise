@@ -25,10 +25,9 @@ struct ChartView: View {
     let yRange: Int
     let xMultiplier: Int // calculates the amount of x-labels
     let yMultiplier: Int
-    let xDefault: Double = 5 // default value for offset/range to be able to render just one point
+    let xDefault: Double = 5 // default value for offset/range to be able to render an empty chart or a single point
     let yDefault: Double = 4
 
-    
     // init to prevent updating issues when using computed properties
     init(dataPoints: [DataPoint], pointSize: CGFloat, pointColor: Color, lineWidth: CGFloat, lineColor: Color, textColor: Color, backgroundColor: Color) {
         self.pointSize = pointSize
@@ -43,15 +42,15 @@ struct ChartView: View {
         let highestPoint = dataPoints.max { $0.yValue < $1.yValue }
         self.maxYValue = highestPoint?.yValue ?? yDefault // default if no dataPoints available
         let lowestPoint = dataPoints.max { $0.yValue > $1.yValue }
-        self.minYValue = lowestPoint?.yValue ?? 1
+        self.minYValue = lowestPoint?.yValue ?? 0
         self.yRange = Int(maxYValue - minYValue < 1 ? yDefault : maxYValue - minYValue)  // prevent division by 0 & crash when range less than 1
         
-        self.maxXValue = dataPoints.max()?.xValue ?? xDefault // max() sufficient due to Comparable
-        self.minXValue = dataPoints.min()?.xValue ?? 1
+        self.maxXValue = dataPoints.max()?.xValue ?? xDefault // max() sufficient due to Comparable on x
+        self.minXValue = dataPoints.min()?.xValue ?? 0
         self.xRange = Int(maxXValue - minXValue < 1 ? xDefault : maxXValue - minXValue)
         
         self.xMultiplier = xRange <= Int(xDefault) ? 1 : xRange / Int(xDefault)
-        self.yMultiplier = yRange <= Int(yDefault) ? 1 : yRange / Int(yDefault) // can be other values dan defaults; takes only a small range into account, almost always range/default
+        self.yMultiplier = yRange <= Int(yDefault) ? 1 : yRange / Int(yDefault) // can be other values than defaults; takes only a small range into account, almost always range/default
     }
     
     @State private var showingLabel = false
@@ -79,7 +78,6 @@ struct ChartView: View {
                     .trim(from: 0, to: lineAnimation)
                     .stroke(lineColor, lineWidth: lineWidth)
                     .onAppear { // now only on appear, how about change?
-                        // need to move and addLine separately when building, since var body is always being rebuilt - how to animate only the new line?
                         // different view when profile is done?
                         withAnimation(.easeOut(duration: 1.0)) {
                             lineAnimation = 1.0
@@ -93,7 +91,7 @@ struct ChartView: View {
                             let x = makePoints(width: geo.size.width, height: geo.size.height, dataPoint: dataPoint).x
                             let y = makePoints(width: geo.size.width, height: geo.size.height, dataPoint: dataPoint).y
                             
-                            let pointX = x - (pointSize / 2) // setting up position based on pointSize - position on the circle edge
+                            let pointX = x - (pointSize / 2) // setting up center position based on pointSize 
                             let pointY = y - (pointSize / 2)
                                             
                             path.addEllipse(in: CGRect(x: pointX, y: pointY, width: pointSize, height: pointSize))
@@ -101,7 +99,7 @@ struct ChartView: View {
                         }
                         .fill(pointColor)
                         .onTapGesture {
-//                            showingLabel.toggle()
+                            showingLabel.toggle()
                         }
                     }
                     
@@ -119,7 +117,7 @@ struct ChartView: View {
                     ForEach(Array(stride(from: 0, through: yRange, by: self.yMultiplier)), id: \.self) { i in
                         let yOffset = makeOffset(width: geo.size.width, height: geo.size.height).yOffset
                         
-                        Text("\(minYValue + Double(yRange) - Double(i), specifier: "%.1f")")
+                        Text("\(yLabelValue - Double(i), specifier: "%.1f")")
                             .font(.footnote)
                             .foregroundColor(textColor)
                             .position(x: -15, y: yOffset * CGFloat(i))
@@ -142,6 +140,14 @@ struct ChartView: View {
         .background(RoundedRectangle(cornerRadius: 10).fill(backgroundColor))
     }
     
+    var yLabelValue: Double {
+        if dataPoints.count == 1 {
+            return minYValue + Double(yRange) / 2
+        } else {
+            return minYValue + Double(yRange)
+        }
+    }
+    
     func makeOffset(width: CGFloat, height: CGFloat) -> (xOffset: CGFloat, yOffset: CGFloat) {
         let xOffset = width / CGFloat(xRange) // range, as smallest value may not be 0
         let yOffset = height / CGFloat(yRange)
@@ -157,7 +163,11 @@ struct ChartView: View {
         let x = xOffset * (CGFloat(dataPoint.xValue - minXValue)) // make sure line starts from first value, not necessarily from 0
         var y = yOffset * CGFloat(dataPoint.yValue - minYValue)
         
-        y = height - y // flip values, ok?
+        if dataPoints.count == 1 {
+            y = (height - y) / 2
+        } else {
+            y = height - y
+        }
         
         return (x, y)
     }
@@ -167,7 +177,11 @@ struct ChartView: View {
         let yOffset = makeOffset(width: width, height: height).yOffset
         
         let x = xOffset * (CGFloat(dataPoints[index].xValue) - minXValue)
-        let y = height - yOffset * CGFloat(dataPoints[index].yValue - minYValue)
+        var y = height - yOffset * CGFloat(dataPoints[index].yValue - minYValue)
+        
+        if dataPoints.count == 1 {
+            y = (height - yOffset * CGFloat(dataPoints[index].yValue - minYValue)) / 2
+        }
         
         return (x, y)
     }

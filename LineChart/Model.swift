@@ -20,13 +20,13 @@ struct DataPoint: Identifiable, Comparable {
 
 struct TestData {
     static let example: [DataPoint] = [
-        DataPoint(xValue: 10.4, yValue: 10),
-        DataPoint(xValue: 10.5, yValue: 5),
-        DataPoint(xValue: 50.0, yValue: 20),
+//        DataPoint(xValue: 10.4, yValue: 10),
+//        DataPoint(xValue: 10.5, yValue: 5),
+//        DataPoint(xValue: 50.0, yValue: 20),
         DataPoint(xValue: 40.0, yValue: 25),
-        DataPoint(xValue: 30.0, yValue: 25),
-        DataPoint(xValue: 50.5, yValue: 35),
-        DataPoint(xValue: 60.0, yValue: 25),
+//        DataPoint(xValue: 30.0, yValue: 25),
+//        DataPoint(xValue: 50.5, yValue: 35),
+//        DataPoint(xValue: 60.0, yValue: 25),
 //        DataPoint(xValue: 80.0, yValue: 45),
 //        DataPoint(xValue: 90.5, yValue: 25),
 //        DataPoint(xValue: 100.0, yValue: 25),
