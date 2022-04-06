@@ -21,6 +21,7 @@ struct ChartView: View {
     @State private var lineAnimation: CGFloat = 1.0
     @State private var xAnimation: CGFloat = 0.0
     @State private var yAnimation: CGFloat = 0.0
+    @State private var duration = 0.8
 
     var body: some View {
         
@@ -80,19 +81,19 @@ struct ChartView: View {
                             .position(x: xAnimation * i, y: geo.size.height + 15)
                     }
                     .onAppear {
-                        withAnimation(.easeOut(duration: 0.8)) {
+                        withAnimation(.easeOut(duration: duration)) {
                             xAnimation = viewModel.makeOffset(width: geo.size.width, height: geo.size.height).xOffset
                         }
                     }
                     .onChange(of: viewModel.xRange) { newValue in
-                        withAnimation(.easeOut(duration: 0.8)) {
+                        withAnimation(.easeOut(duration: duration)) {
                             xAnimation = makeLabelAnimation(distance: geo.size.width, range: newValue)
                         }
                     }
                     .onChange(of: viewModel.minXValue) { _ in
                         if viewModel.xRange == viewModel.defaultXRange {
                             xAnimation = 0.0
-                            withAnimation(.easeOut(duration: 0.8)) {
+                            withAnimation(.easeOut(duration: duration)) {
                                 xAnimation = viewModel.makeOffset(width: geo.size.width, height: geo.size.height).xOffset
                             }
                         }
@@ -105,20 +106,20 @@ struct ChartView: View {
                             .position(x: -15, y: yAnimation * i)
                     }
                     .onAppear {
-                        withAnimation(.easeOut(duration: 0.8)) {
+                        withAnimation(.easeOut(duration: duration)) {
                             yAnimation = viewModel.makeOffset(width: geo.size.width, height: geo.size.height).yOffset
                         }
                     }
                     .onChange(of: viewModel.minYValue) { _ in
                         if viewModel.yRange == viewModel.defaultYRange {
                             yAnimation = 0.0
-                            withAnimation(.easeOut(duration: 0.8)) {
+                            withAnimation(.easeOut(duration: duration)) {
                                 yAnimation = viewModel.makeOffset(width: geo.size.width, height: geo.size.height).yOffset
                             }
                         }
                     }
                     .onChange(of: viewModel.yRange) { newValue in
-                        withAnimation(.easeOut(duration: 0.8)) {
+                        withAnimation(.easeOut(duration: duration)) {
                             yAnimation = makeLabelAnimation(distance: geo.size.height, range: newValue)
                         }
                     }
