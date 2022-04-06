@@ -7,15 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8635B7BF27FC4DC2000266B7 /* ChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8635B7BE27FC4DC2000266B7 /* ChartViewModel.swift */; };
+		8635B7C127FC677C000266B7 /* CustomDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8635B7C027FC677C000266B7 /* CustomDatePicker.swift */; };
 		86C41D83275A2C6E00EF166B /* LineChartApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C41D82275A2C6E00EF166B /* LineChartApp.swift */; };
 		86C41D85275A2C6E00EF166B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C41D84275A2C6E00EF166B /* ContentView.swift */; };
 		86C41D87275A2C6E00EF166B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86C41D86275A2C6E00EF166B /* Assets.xcassets */; };
 		86C41D8A275A2C6E00EF166B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86C41D89275A2C6E00EF166B /* Preview Assets.xcassets */; };
 		86C41D91275A2CA200EF166B /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C41D90275A2CA200EF166B /* Model.swift */; };
 		86C41D95275A31ED00EF166B /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C41D94275A31ED00EF166B /* ChartView.swift */; };
+		86D1DB4B27FB13860051A376 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D1DB4A27FB13860051A376 /* String.swift */; };
+		86D1DB4D27FB13E00051A376 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D1DB4C27FB13E00051A376 /* Date.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8635B7BE27FC4DC2000266B7 /* ChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModel.swift; sourceTree = "<group>"; };
+		8635B7C027FC677C000266B7 /* CustomDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDatePicker.swift; sourceTree = "<group>"; };
 		86C41D7F275A2C6E00EF166B /* LineChart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LineChart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86C41D82275A2C6E00EF166B /* LineChartApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChartApp.swift; sourceTree = "<group>"; };
 		86C41D84275A2C6E00EF166B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -23,6 +29,8 @@
 		86C41D89275A2C6E00EF166B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		86C41D90275A2CA200EF166B /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		86C41D94275A31ED00EF166B /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		86D1DB4A27FB13860051A376 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		86D1DB4C27FB13E00051A376 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,8 +65,11 @@
 			children = (
 				86C41D82275A2C6E00EF166B /* LineChartApp.swift */,
 				86C41D84275A2C6E00EF166B /* ContentView.swift */,
+				8635B7C027FC677C000266B7 /* CustomDatePicker.swift */,
 				86C41D90275A2CA200EF166B /* Model.swift */,
 				86C41D94275A31ED00EF166B /* ChartView.swift */,
+				8635B7BE27FC4DC2000266B7 /* ChartViewModel.swift */,
+				86D1DB4727FB13680051A376 /* Extensions */,
 				86C41D86275A2C6E00EF166B /* Assets.xcassets */,
 				86C41D88275A2C6E00EF166B /* Preview Content */,
 			);
@@ -71,6 +82,15 @@
 				86C41D89275A2C6E00EF166B /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		86D1DB4727FB13680051A376 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				86D1DB4C27FB13E00051A376 /* Date.swift */,
+				86D1DB4A27FB13860051A376 /* String.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,10 +163,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8635B7C127FC677C000266B7 /* CustomDatePicker.swift in Sources */,
+				86D1DB4B27FB13860051A376 /* String.swift in Sources */,
+				86D1DB4D27FB13E00051A376 /* Date.swift in Sources */,
 				86C41D91275A2CA200EF166B /* Model.swift in Sources */,
 				86C41D85275A2C6E00EF166B /* ContentView.swift in Sources */,
 				86C41D95275A31ED00EF166B /* ChartView.swift in Sources */,
 				86C41D83275A2C6E00EF166B /* LineChartApp.swift in Sources */,
+				8635B7BF27FC4DC2000266B7 /* ChartViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,7 +301,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"LineChart/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = J3MY552HWD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -306,7 +330,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"LineChart/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = J3MY552HWD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
